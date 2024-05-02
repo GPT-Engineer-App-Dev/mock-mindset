@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Box, Heading, Input, List, ListItem, VStack, HStack, IconButton, useToast } from "@chakra-ui/react";
+import { motion } from "framer-motion";
+const MotionListItem = motion(ListItem);
 import Footer from "../components/Footer";
 import { FaPlus, FaTrash } from "react-icons/fa";
 
@@ -46,12 +48,12 @@ const Index = () => {
         </HStack>
         <List spacing={3} my={5} w="100%">
           {todos.map((todo, index) => (
-            <ListItem key={index} p={2} bg="gray.100" borderRadius="md">
+            <MotionListItem key={index} p={2} bg="gray.100" borderRadius="md" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 10 }} layout>
               <HStack justify="space-between">
                 <Box>{todo}</Box>
                 <IconButton icon={<FaTrash />} onClick={() => deleteTodo(index)} colorScheme="red" aria-label="Delete todo" />
               </HStack>
-            </ListItem>
+            </MotionListItem>
           ))}
         </List>
       </VStack>
